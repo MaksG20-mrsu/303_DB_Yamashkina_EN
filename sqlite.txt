@@ -1,0 +1,2 @@
+SQLite version 3.50.4 2025-07-30 19:33:53
+Доступные режимы вывода данных: line, column, insert и html.
