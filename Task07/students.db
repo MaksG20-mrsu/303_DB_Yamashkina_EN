@@ -1,0 +1,13 @@
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_number TEXT NOT NULL,           -- Номер группы (например, "ИТ-101")
+    study_program TEXT NOT NULL,          -- Направление подготовки
+    last_name TEXT NOT NULL,              -- Фамилия
+    first_name TEXT NOT NULL,             -- Имя
+    middle_name TEXT,                     -- Отчество (может быть NULL)
+    gender TEXT NOT NULL CHECK (gender IN ('М', 'Ж')),  -- Пол
+    birth_date DATE NOT NULL,             -- Дата рождения
+    student_card_number TEXT UNIQUE NOT NULL,  -- Номер студенческого билета
+    graduation_year INTEGER NOT NULL,     -- Год окончания обучения
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
