@@ -1,0 +1,736 @@
+/* ============================================
+   Основные стили для приложения "Список студентов"
+   ============================================ */
+
+/* 1. Сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Цветовая палитра */
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #34495e;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    
+    /* Цвета для текста */
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --text-light: #95a5a6;
+    
+    /* Оттенки фона */
+    --bg-light: #f5f7fa;
+    --bg-white: #ffffff;
+    --bg-gray: #f8f9fa;
+    
+    /* Тени */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+    
+    /* Скругления */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Анимации */
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+    --transition-slow: 500ms ease;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--bg-light) 0%, #e3f2fd 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* 2. Контейнеры и обертки */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--bg-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+}
+
+/* 3. Заголовки */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--secondary-color);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    position: relative;
+    color: var(--secondary-color);
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    border-radius: var(--radius-sm);
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.page-title i {
+    color: var(--primary-color);
+    font-size: 2.2rem;
+}
+
+/* 4. Формы и элементы управления */
+.filter-form {
+    background: linear-gradient(135deg, #f8f9fa 0%, var(--bg-white) 100%);
+    padding: 30px;
+    border-radius: var(--radius-lg);
+    margin-bottom: 40px;
+    border: 1px solid rgba(52, 152, 219, 0.1);
+    box-shadow: var(--shadow-md);
+    transition: box-shadow var(--transition-normal);
+}
+
+.filter-form:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+label i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+select {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid rgba(189, 195, 199, 0.5);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background-color: var(--bg-white);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%233498db' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 16px;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+select:disabled {
+    background-color: var(--bg-gray);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* 5. Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+.btn-secondary:hover {
+    background-color: #dde4e6;
+    transform: translateY(-2px);
+}
+
+.btn-reset {
+    background-color: var(--text-light);
+    color: white;
+}
+
+.btn-reset:hover {
+    background-color: #7f8c8d;
+}
+
+.btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-group .btn {
+    flex: 1;
+    min-width: 160px;
+}
+
+/* 6. Таблица */
+.table-container {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    background: var(--bg-white);
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 800px;
+}
+
+thead {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+thead th {
+    color: white;
+    padding: 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 3px solid var(--primary-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+thead th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.1));
+    pointer-events: none;
+}
+
+thead th:first-child {
+    border-top-left-radius: var(--radius-lg);
+}
+
+thead th:last-child {
+    border-top-right-radius: var(--radius-lg);
+}
+
+tbody tr {
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid rgba(236, 240, 241, 0.8);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(248, 249, 250, 0.5);
+}
+
+tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+td {
+    padding: 18px 20px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(236, 240, 241, 0.8);
+}
+
+td:first-child {
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+td:last-child {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+}
+
+/* 7. Стили для гендера */
+.gender-male {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gender-male::before {
+    content: '♂';
+    font-size: 1.2rem;
+}
+
+.gender-female {
+    color: #e84393;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gender-female::before {
+    content: '♀';
+    font-size: 1.2rem;
+}
+
+/* 8. Статистика и информационные блоки */
+.stats {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    color: var(--dark-color);
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stats-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.stats-info i {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+}
+
+.stats-group {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+}
+
+/* 9. Сообщения об ошибках и предупреждения */
+.error {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    color: #d63031;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 30px;
+    border-left: 4px solid #d63031;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.error i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* 10. Нет данных */
+.no-data {
+    text-align: center;
+    padding: 60px 40px;
+    color: var(--text-secondary);
+}
+
+.no-data i {
+    font-size: 4rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    display: block;
+}
+
+.no-data h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+}
+
+.no-data p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* 11. Пагинация (если понадобится) */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.page-link {
+    padding: 10px 16px;
+    border: 2px solid var(--light-color);
+    border-radius: var(--radius-sm);
+    color: var(--dark-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-fast);
+    min-width: 44px;
+    text-align: center;
+}
+
+.page-link:hover {
+    background-color: var(--light-color);
+    border-color: var(--primary-color);
+}
+
+.page-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 12. Подвал */
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    padding-top: 20px;
+    border-top: 1px solid rgba(189, 195, 199, 0.3);
+}
+
+.footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* 13. Адаптивность */
+@media (max-width: 1200px) {
+    .container {
+        padding: 30px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    
+    .filter-form {
+        padding: 25px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 20px;
+        border-radius: var(--radius-lg);
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .page-title {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .filter-form {
+        padding: 20px;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    th, td {
+        padding: 12px 15px;
+    }
+    
+    .stats {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    .filter-form {
+        padding: 15px;
+    }
+    
+    select, .btn {
+        padding: 12px 16px;
+    }
+    
+    th, td {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .gender-male::before,
+    .gender-female::before {
+        display: none;
+    }
+}
+
+/* 14. Анимации загрузки (опционально) */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 15. Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-gray);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* 16. Утилитарные классы */
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-3 { margin-top: 30px; }
+.mt-4 { margin-top: 40px; }
+.mt-5 { margin-top: 50px; }
+
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.mb-3 { margin-bottom: 30px; }
+.mb-4 { margin-bottom: 40px; }
+.mb-5 { margin-bottom: 50px; }
+
+.p-1 { padding: 10px; }
+.p-2 { padding: 20px; }
+.p-3 { padding: 30px; }
+.p-4 { padding: 40px; }
+.p-5 { padding: 50px; }
+
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-1 { gap: 10px; }
+.gap-2 { gap: 20px; }
+.gap-3 { gap: 30px; }
+
+/* 17. Иконки (Font Awesome или аналогичные) */
+.icon {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+}
+
+.icon-student::before { content; }
+.icon-group::before { content; }
+.icon-search::before { content; }
+.icon-filter::before { content; }
+.icon-refresh::before { content; }
