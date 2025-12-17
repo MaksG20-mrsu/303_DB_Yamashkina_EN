@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}{% if exam %}Редактировать экзамен{% else %}Добавить экзамен{% endif %}{% endblock %}
+{% block header %}
+    {% if exam %}Редактировать экзамен{% else %}Добавить экзамен{% endif %}
+    <br><small>Студент: {{ student.last_name }} {{ student.first_name }}</small>
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{{ action }}" class="form">
+    <input type="hidden" id="specialization" value="{{ student.specialization }}">
+    
+    <div class="form-group">
+        <label for="year_of_study">Курс *</label>
+        <select id="year_of_study" name="year_of_study" required>
+            <option value="">Выберите курс</option>
+            {% for year in available_years %}
+            <option value="{{ year }}" 
+                    {% if exam and exam.year_of_study == year %}selected{% endif %}>
+                {{ year }} курс
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="semester">Семестр *</label>
+        <select id="semester" name="semester" required>
+            <option value="">Выберите семестр</option>
+            <option value="1" {% if exam and exam.semester == 1 %}selected{% endif %}>1 семестр</option>
+            <option value="2" {% if exam and exam.semester == 2 %}selected{% endif %}>2 семестр</option>
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="discipline_id">Дисциплина *</label>
+        <select id="discipline_id" name="discipline_id" required>
+            <option value="">Выберите курс для загрузки дисциплин</option>
+            {% if exam %}
+                <option value="{{ exam.discipline_id }}" selected>
+                    {{ exam.discipline_name }}
+                </option>
+            {% endif %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="exam_date">Дата экзамена *</label>
+        <input type="date" id="exam_date" name="exam_date" 
+               value="{{ exam.exam_date if exam else '' }}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="grade">Оценка *</label>
+        <select id="grade" name="grade" required>
+            <option value="">Выберите оценку</option>
+            <option value="5" {% if exam and exam.grade == 5 %}selected{% endif %}>5 (Отлично)</option>
+            <option value="4" {% if exam and exam.grade == 4 %}selected{% endif %}>4 (Хорошо)</option>
+            <option value="3" {% if exam and exam.grade == 3 %}selected{% endif %}>3 (Удовлетворительно)</option>
+            <option value="2" {% if exam and exam.grade == 2 %}selected{% endif %}>2 (Неудовлетворительно)</option>
+        </select>
+    </div>
+    
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            {% if exam %}Сохранить{% else %}Добавить{% endif %}
+        </button>
+        <a href="{{ url_for('student_exams', student_id=student.id) }}" class="btn">Отмена</a>
+    </div>
+</form>
+{% endblock %}
